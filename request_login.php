@@ -9,8 +9,7 @@ if(empty($_SESSION["usuario"])){
 	$uri = $_SERVER['REQUEST_URI'];
 	
 	if($_SESSION['chefe'] != 1){
-		if(strpos($uri, "register_patient.php") !== false
-		|| strpos($uri, "register_doctor.php") !== false){
+		if(strpos($uri, "register_doctor.php") !== false){
 			
 			header("Location: list_patient.php");
 		}

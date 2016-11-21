@@ -53,20 +53,32 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 	
 	// Cadastro de novo paciente
 	if($result->num_rows == 0){
-		if(mysqli_query($conn, "INSERT INTO paciente VALUES 
-		($cpf, '$nome', '$data_aniversario', '$telefone', '$email', '$tipo_sanguineo', '$plano_saude', '$alergias', '$prontuario')")){
-			
-			$msg = "<div class=\"alert alert-success\">Paciente inserido com sucesso!</div>";
+		if($_SESSION['chefe'] == 0){
+			$msg = "<div class=\"alert alert-danger\">É necessário informar um CPF existente para atualizar o prontuário do Paciente!</div>";
+		} else {
+			if(mysqli_query($conn, "INSERT INTO paciente VALUES 
+			($cpf, '$nome', '$data_aniversario', '$telefone', '$email', '$tipo_sanguineo', '$plano_saude', '$alergias', '$prontuario')")){
+				
+				$msg = "<div class=\"alert alert-success\">Paciente inserido com sucesso!</div>";
+			}
 		}
 	}
 	// Atualizando paciente existente
 	else {
-		if(mysqli_query($conn, "UPDATE paciente SET
-		nome = '$nome', dataaniversario = '$dataaniversario', telefone = '$telefone', email = '$email', tiposanguineo = '$tipo_sanguineo',
-		planosaude = '$plano_saude', alergias = '$alergias', prontuario = '$prontuario'
-		WHERE cpf = $cpf;")){
-			
-			$msg = "<div class=\"alert alert-success\">Paciente atualizado com sucesso!</div>";
+		if($_SESSION['chefe'] == 0){
+			if(mysqli_query($conn, "UPDATE paciente SET prontuario = '$prontuario' WHERE cpf = $cpf;")){
+				
+				$msg = "<div class=\"alert alert-success\">Prontuário do Paciente atualizado com sucesso!</div>";
+			}
+		} else {
+		
+			if(mysqli_query($conn, "UPDATE paciente SET
+			nome = '$nome', dataaniversario = '$dataaniversario', telefone = '$telefone', email = '$email', tiposanguineo = '$tipo_sanguineo',
+			planosaude = '$plano_saude', alergias = '$alergias', prontuario = '$prontuario'
+			WHERE cpf = $cpf;")){
+				
+				$msg = "<div class=\"alert alert-success\">Paciente atualizado com sucesso!</div>";
+			}
 		}
 	}
 }
@@ -84,10 +96,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 	<div class="container">
 		<div class="row">
 			<div class="col-md-4">
-				<h3>Cadastrar Paciente</h3>
+				<h3><?php echo ($_SESSION['chefe'] == 0 ? "Atualizar Prontuário de Paciente" : "Cadastrar Paciente") ?></h3>
 				<form role="form-horizontal" id="form_padrao" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 					<div class="form-group">
 					<?php 
+					
 					if(!empty($msg)){
 						echo "$msg";
 					}
@@ -95,56 +108,56 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 						<label for="inputNome">
 							Nome completo
 						</label>
-						<input type="text" class="form-control" id="inputNome" maxlength="50" name="nome" <?php if(!empty($_SESSION['chefe']) && $_SESSION['chefe'] == 0){ echo "readonly";} else { echo "required";} ?>>
+						<input type="text" class="form-control" id="inputNome" maxlength="50" name="nome" <?php echo ($_SESSION['chefe'] == 0 ? "readonly" : "required") ?>>
 					</div>
 					<div class="form-group">
 						<label for="inputData">
 							Data de aniversário
 						</label>
-						<input type="text" class="form-control" id="inputData" name="data_aniversario" <?php if(!empty($_SESSION['chefe']) && $_SESSION['chefe'] == 0){ echo "readonly";} ?>>
+						<input type="text" class="form-control" id="inputData" name="data_aniversario" <?php echo ($_SESSION['chefe'] == 0 ? "readonly" : "") ?>>
 					</div>
 					<div class="form-group">
 						<label for="inputCPF">
 							CPF
 						</label>
-						<input type="number" class="form-control" id="inputCPF" name="cpf" <?php if(!empty($_SESSION['chefe']) && $_SESSION['chefe'] == 0){ echo "readonly";} else { echo "required";} ?>>
+						<input type="number" class="form-control" id="inputCPF" name="cpf" required>
 					</div>
 					<div class="form-group">
 						<label for="inputTelefone">
 							Telefone
 						</label>
-						<input type="text" class="form-control" id="inputTelefone" name="telefone" <?php if(!empty($_SESSION['chefe']) && $_SESSION['chefe'] == 0){ echo "readonly";} ?>>
+						<input type="text" class="form-control" id="inputTelefone" name="telefone" <?php echo ($_SESSION['chefe'] == 0 ? "readonly" : "") ?>>
 					</div>
 					<div class="form-group">
 						<label for="inputEmail">
 							E-mail
 						</label>
-						<input type="email" class="form-control" id="inputEmail" maxlength="40" name="email" <?php if(!empty($_SESSION['chefe']) && $_SESSION['chefe'] == 0){ echo "readonly";} ?>>
+						<input type="email" class="form-control" id="inputEmail" maxlength="40" name="email" <?php echo ($_SESSION['chefe'] == 0 ? "readonly" : "") ?>>
 					</div>
 					<div class="form-group">
 						<label for="inputTS">
 							Tipo sanguíneo
 						</label>
-						<input type="text" class="form-control" id="inputTS" maxlength="3" name="tipo_sanguineo" <?php if(!empty($_SESSION['chefe']) && $_SESSION['chefe'] == 0){ echo "readonly";} else { echo "required";} ?>>
+						<input type="text" class="form-control" id="inputTS" maxlength="3" name="tipo_sanguineo" <?php echo ($_SESSION['chefe'] == 0 ? "readonly" : "required") ?>>
 					</div>
 					<div class="form-group">
 						<label for="inputPdS">
 							Plano de saúde
 						</label>
-						<input type="text" class="form-control" id="inputPdS" maxlength="30" name="plano_saude" <?php if(!empty($_SESSION['chefe']) && $_SESSION['chefe'] == 0){ echo "readonly";} else { echo "required";} ?>>
+						<input type="text" class="form-control" id="inputPdS" maxlength="30" name="plano_saude" <?php echo ($_SESSION['chefe'] == 0 ? "readonly" : "required") ?>>
 					</div>
 					<div class="form-group">
 						<label for="inputAlergias">
 							Alergias
 						</label>
-						<input type="text" class="form-control" id="inputAlergias" maxlength="100" name="alergias" <?php if(!empty($_SESSION['chefe']) && $_SESSION['chefe'] == 0){ echo "readonly";} ?>>
+						<input type="text" class="form-control" id="inputAlergias" maxlength="100" name="alergias" <?php echo ($_SESSION['chefe'] == 0 ? "readonly" : "required") ?>>
 					</div>
 					<div class="form-group">
 						<label for="inputProntuario">Prontuário</label>
-						<textarea form="form_padrao" class="form-control" rows="5" id="inputProntuario" name="prontuario"></textarea>
+						<textarea form="form_padrao" class="form-control" rows="5" id="inputProntuario" name="prontuario" <?php echo ($_SESSION['chefe'] == 0 ? "required" : "") ?>></textarea>
 					</div>
 					<button type="submit" class="btn btn-default">
-						Cadastrar
+						<?php echo ($_SESSION['chefe'] == 0 ? "Atualizar" : "Cadastrar") ?>
 					</button>
 				</form>
 			</div>

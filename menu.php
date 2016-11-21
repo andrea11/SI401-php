@@ -12,7 +12,7 @@ if(!empty($_SESSION['usuario'])){
 					<a href="list_patient.php" class="">Consultar Paciente</a>
 		  </li>
 		  <li ' . (strpos($uri, "register_patient.php") !== false ? 'class="active"' : '') . '>
-					<a href="register_patient.php" class="">Cadastrar Paciente</a>
+					<a href="register_patient.php" class="">' . ($_SESSION['chefe'] == 0 ? "Atualizar Prontuário" : "Cadastrar Paciente") . '</a>
 		  </li>';
 		  
 	if(!empty($_SESSION['chefe']) && $_SESSION['chefe'] == 1){
