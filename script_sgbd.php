@@ -29,6 +29,7 @@ if($verificacao_db->num_rows == 0){
 	$create_paciente = "CREATE TABLE paciente (
 							cpf int PRIMARY KEY,
 							nome varchar(50) NOT NULL,
+							dataaniversario varchar(20),
 							telefone varchar(20),
 							email varchar(40),
 							tiposanguineo varchar(3) NOT NULL,
@@ -61,10 +62,6 @@ if($verificacao_db->num_rows == 0){
 		echo "Falha ao inserir usuario admin: " . mysqli_error($conn);
 		return;
 	}
-	
-	echo "Base de dados criada com sucesso!";
-	
-	mysqli_close($conn);
 } else {
 	mysqli_select_db($conn, $database);
 }
