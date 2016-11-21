@@ -1,0 +1,3 @@
+Utilizamos o MySQL.
+
+Para a criação da base de dados inicial, editar o script "script_sgbd.php" informando o Servidor do MySQL e o Usuário/Senha através das constantes no inicio do código (servername, username e password). Não há necessidade de alterar a constante$database.

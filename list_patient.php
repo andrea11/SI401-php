@@ -1,3 +1,6 @@
+<?php
+include "request_login.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -39,22 +42,7 @@
 			</button> <a class="navbar-brand" href="#">SI401</a>
 		</div>
 		
-		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-			<ul class="nav navbar-nav">
-				<li>
-					<a href="register_patient.html" class="">Cadastrar Paciente</a>
-				</li>
-				<li>
-					<a href="register_doctor.html" class="">Cadastrar Medico</a>
-				</li>
-				<li class="active">
-					<a href="list_patient.html" class="">Consultar Paciente</a>
-				</li>
-				<li>
-					<a href="#logout" class="">Logout</a>
-				</li>
-			</ul>
-		</div>
+		<?php include "menu.php"; ?>
 	</nav>
 	<div class="container">
 		<div class="row">
