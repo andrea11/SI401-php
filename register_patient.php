@@ -23,8 +23,9 @@ include "request_login.php";
 	<script type="text/javascript">$(function() {
 		    $('#inputData').datepicker({
 				autoclose: true,
-				startDate: "01-01-1900",
-				endDate: "31-12-2016",
+				format: "yyyy-mm-dd",
+				startDate: "1900-01-01",
+				endDate: "2016-12-31",
 			    todayBtn: "linked",
 			    language: "pt-BR",
 			    todayHighlight: true
