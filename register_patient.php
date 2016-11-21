@@ -54,7 +54,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 	// Cadastro de novo paciente
 	if($result->num_rows == 0){
 		if(mysqli_query($conn, "INSERT INTO paciente VALUES 
-		($cpf, '$nome', '$telefone', '$email', '$tipo_sanguineo', '$plano_saude', '$alergias', '$prontuario')")){
+		($cpf, '$nome', '$data_aniversario', '$telefone', '$email', '$tipo_sanguineo', '$plano_saude', '$alergias', '$prontuario')")){
 			
 			$msg = "<div class=\"alert alert-success\">Paciente inserido com sucesso!</div>";
 		}
@@ -62,7 +62,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 	// Atualizando paciente existente
 	else {
 		if(mysqli_query($conn, "UPDATE paciente SET
-		nome = '$nome', telefone = '$telefone', email = '$email', tiposanguineo = '$tipo_sanguineo',
+		nome = '$nome', dataaniversario = '$dataaniversario', telefone = '$telefone', email = '$email', tiposanguineo = '$tipo_sanguineo',
 		planosaude = '$plano_saude', alergias = '$alergias', prontuario = '$prontuario'
 		WHERE cpf = $cpf;")){
 			

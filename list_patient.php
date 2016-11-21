@@ -63,96 +63,62 @@ include "request_login.php";
 							</tr>
 						</thead>
 						<tbody>
-							<tr id="basicInfos1" data-parent="#accordion" data-toggle="collapse" data-target="#extra1" aria-hidden="true">
-								<td>John</td>
-								<td>Doe</td>
-								<td>Doe</td>
-								<td>Doe</td>
-								<td>Doe</td>
-								<td>Doe</td>
-								<td>Doe</td>
+						<?php
+						include "script_sgbd.php";
+						
+						$query = "SELECT * FROM paciente";
+
+						if ($result = mysqli_query($conn, $query)) {
+						
+							$i = 0;
+							while ($row = mysqli_fetch_assoc($result)) {
+								$i = $i + 1;
+								
+								$nome = $row['nome'];
+								$dataaniversario = $row['dataaniversario'];
+								$cpf = $row['cpf'];
+								$telefone = $row['telefone'];
+								$email = $row['email'];
+								$tiposanguineo = $row['tiposanguineo'];
+								$planosaude = $row['planosaude'];
+								$alergias = $row['alergias'];
+								$prontuario = $row['prontuario'];
+								
+								echo "<tr id=\"basicInfos$i\" data-parent=\"#accordion\" data-toggle=\"collapse\" data-target=\"#extra$i\" aria-hidden=\"true\">
+								<td>$nome</td>
+								<td>$dataaniversario</td>
+								<td>$cpf</td>
+								<td>$telefone</td>
+								<td>$email</td>
+								<td>$tiposanguineo</td>
+								<td>$planosaude</td>
 								<td>
-									<i class="indicator glyphicon glyphicon-chevron-up pull-right"></i>
+									<i class=\"indicator glyphicon glyphicon-chevron-up pull-right\"></i>
 								</td>
 							</tr>
-							<tr class="hidden">
-								<td colspan="8">
-									<div id="extra1" data-info="basicInfos1" class="panel-group collapse extraInfos">
-										<div class="panel panel-default">
-											<div class="panel-heading">Alergias</div>
-      										<div class="panel-body">
-      											Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut eleifend ligula metus, quis porta nisl facilisis at. Curabitur cursus sem quis pharetra laoreet. Mauris eleifend rutrum dui, ac eleifend nisi pretium a. Nullam volutpat lorem at leo congue, lobortis suscipit neque ornare. Morbi auctor est erat, eget fermentum magna sodales ut. Pellentesque lobortis elit non leo luctus suscipit. Curabitur at feugiat eros, eu varius elit. Maecenas risus eros, euismod imperdiet justo ultricies, finibus tincidunt velit. In sollicitudin nisi at neque euismod, eu ornare nibh pellentesque. Donec nec odio vitae dolor imperdiet sagittis quis nec nibh. Sed nec nibh posuere sem lobortis sodales. Duis ac mi eu purus hendrerit vehicula. Mauris tempor risus sagittis, varius ante eu, lobortis elit.
+							<tr class=\"hidden\">
+								<td colspan=\"8\">
+									<div id=\"extra$i\" data-info=\"basicInfos$i\" class=\"panel-group collapse extraInfos\">
+										<div class=\"panel panel-default\">
+											<div class=\"panel-heading\">Alergias</div>
+      										<div class=\"panel-body\">
+      											$alergias
       										</div>
 										</div>
-										<div class="panel panel-default">
-											<div class="panel-heading">Prontuario</div>
-      										<div class="panel-body">
-      											Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut eleifend ligula metus, quis porta nisl facilisis at. Curabitur cursus sem quis pharetra laoreet. Mauris eleifend rutrum dui, ac eleifend nisi pretium a. Nullam volutpat lorem at leo congue, lobortis suscipit neque ornare. Morbi auctor est erat, eget fermentum magna sodales ut. Pellentesque lobortis elit non leo luctus suscipit. Curabitur at feugiat eros, eu varius elit. Maecenas risus eros, euismod imperdiet justo ultricies, finibus tincidunt velit. In sollicitudin nisi at neque euismod, eu ornare nibh pellentesque. Donec nec odio vitae dolor imperdiet sagittis quis nec nibh. Sed nec nibh posuere sem lobortis sodales. Duis ac mi eu purus hendrerit vehicula. Mauris tempor risus sagittis, varius ante eu, lobortis elit.
+										<div class=\"panel panel-default\">
+											<div class=\"panel-heading\">Prontuario</div>
+      										<div class=\"panel-body\">
+      											$prontuario
       										</div>
 										</div>
 									</div>
 								</td>
-							</tr>
-							<tr id="basicInfos2" data-parent="#accordion" data-toggle="collapse" data-target="#extra2" aria-hidden="true">
-								<td>John</td>
-								<td>Doe</td>
-								<td>Doe</td>
-								<td>Doe</td>
-								<td>Doe</td>
-								<td>Doe</td>
-								<td>Doe</td>
-								<td>
-									<i class="indicator glyphicon glyphicon-chevron-up pull-right"></i>
-								</td>
-							</tr>
-							<tr class="hidden">
-								<td colspan="8">
-									<div id="extra2" data-info="basicInfos2" class="panel-group collapse extraInfos">
-										<div class="panel panel-default">
-											<div class="panel-heading">Alergias</div>
-      										<div class="panel-body">
-      											Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut eleifend ligula metus, quis porta nisl facilisis at. Curabitur cursus sem quis pharetra laoreet. Mauris eleifend rutrum dui, ac eleifend nisi pretium a. Nullam volutpat lorem at leo congue, lobortis suscipit neque ornare. Morbi auctor est erat, eget fermentum magna sodales ut. Pellentesque lobortis elit non leo luctus suscipit. Curabitur at feugiat eros, eu varius elit. Maecenas risus eros, euismod imperdiet justo ultricies, finibus tincidunt velit. In sollicitudin nisi at neque euismod, eu ornare nibh pellentesque. Donec nec odio vitae dolor imperdiet sagittis quis nec nibh. Sed nec nibh posuere sem lobortis sodales. Duis ac mi eu purus hendrerit vehicula. Mauris tempor risus sagittis, varius ante eu, lobortis elit.
-      										</div>
-										</div>
-										<div class="panel panel-default">
-											<div class="panel-heading">Prontuario</div>
-      										<div class="panel-body">
-      											Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut eleifend ligula metus, quis porta nisl facilisis at. Curabitur cursus sem quis pharetra laoreet. Mauris eleifend rutrum dui, ac eleifend nisi pretium a. Nullam volutpat lorem at leo congue, lobortis suscipit neque ornare. Morbi auctor est erat, eget fermentum magna sodales ut.
-      										</div>
-										</div>
-									</div>
-								</td>
-							</tr>
-							<tr id="basicInfos3" data-parent="#accordion" data-toggle="collapse" data-target="#extra3" aria-hidden="true">
-								<td>John</td>
-								<td>Doe</td>
-								<td>Doe</td>
-								<td>Doe</td>
-								<td>Doe</td>
-								<td>Doe</td>
-								<td>Doe</td>
-								<td>
-									<i class="indicator glyphicon glyphicon-chevron-up pull-right"></i>
-								</td>
-							</tr>
-							<tr class="hidden">
-								<td colspan="8">
-									<div id="extra3" data-info="basicInfos3" class="panel-group collapse extraInfos">
-										<div class="panel panel-default">
-											<div class="panel-heading">Alergias</div>
-      										<div class="panel-body">
-      											Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut eleifend ligula metus, quis porta nisl facilisis at. Curabitur cursus sem quis pharetra laoreet. Mauris eleifend rutrum dui, ac eleifend nisi pretium a. Nullam volutpat lorem at leo congue, lobortis suscipit neque ornare. Morbi auctor est erat, eget fermentum magna sodales ut. Pellentesque lobortis elit non leo luctus suscipit. Curabitur at feugiat eros, eu varius elit. Maecenas risus eros, euismod imperdiet justo ultricies, finibus tincidunt velit. In sollicitudin nisi at neque euismod, eu ornare nibh pellentesque. Donec nec odio vitae dolor imperdiet sagittis quis nec nibh. Sed nec nibh posuere sem lobortis sodales. Duis ac mi eu purus hendrerit vehicula. Mauris tempor risus sagittis, varius ante eu, lobortis elit.
-      										</div>
-										</div>
-										<div class="panel panel-default">
-											<div class="panel-heading">Prontuario</div>
-      										<div class="panel-body">
-      											Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut eleifend ligula metus, quis porta nisl facilisis at. Curabitur cursus sem quis pharetra laoreet. Mauris eleifend rutrum dui, ac eleifend nisi pretium a. Nullam volutpat lorem at leo congue, lobortis suscipit neque ornare. Morbi auctor est erat, eget fermentum magna sodales ut. Pellentesque lobortis elit non leo luctus suscipit. Curabitur at feugiat eros, eu varius elit. Maecenas risus eros, euismod imperdiet justo ultricies, finibus tincidunt velit. In sollicitudin nisi at neque euismod, eu ornare nibh pellentesque. Donec nec odio vitae dolor imperdiet sagittis quis nec nibh. Sed nec nibh posuere sem lobortis sodales. Duis ac mi eu purus hendrerit vehicula. Mauris tempor risus sagittis, varius ante eu, lobortis elit.
-      										</div>
-										</div>
-									</div>
-								</td>
-							</tr>
+							</tr>";
+							}
+						
+							mysqli_free_result($result);
+						}
+						?>
 						</tbody>
 					</table>
 				</div>
