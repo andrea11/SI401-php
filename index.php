@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,62 +19,74 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
+<?php
+
+if(!empty($_SESSION["usuario"])){
+	 header('Location: list_patient.php');
+}
+
+// Se uma requisição post ocorreu, realizo o login
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+	include "script_sgbd.php";
+
+	$usuario = $_POST['usuario'];
+	$senha = $_POST['senha'];
+	
+	$error_msg = "";
+	
+	$result = mysqli_query($conn, "SELECT chefe FROM medico WHERE usuario = '$usuario' AND senha = '$senha'");
+	if($result->num_rows == 0){
+		$error_msg = "Combinação de usuário e senha inválida!";
+	} else {	
+		$_SESSION["usuario"] = $usuario;
+		
+		$row_result = mysqli_fetch_row($result);
+		$_SESSION["chefe"] = $row_result[0];
+		
+		header('Location: list_patient.php');
+	}
+}
+
+?>
 	<nav class="navbar navbar-default navbar-inverse navbar-fixed-top" role="navigation">
 		<div class="navbar-header">
 			 
 			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
 				 <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
-			</button> <a class="navbar-brand" href="index.html">SI401</a>
+			</button> <a class="navbar-brand active" href="index.php">SI401</a>
 		</div>
 		
-		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-			<ul class="nav navbar-nav">
-				<li>
-					<a href="register_patient.html" class="">Cadastrar Paciente</a>
-				</li>
-				<li class="active">
-					<a href="register_doctor.html" class="">Cadastrar Medico</a>
-				</li>
-				<li>
-					<a href="list_patient.html" class="">Consultar Paciente</a>
-				</li>
-				<li>
-					<a href="#logout" class="">Logout</a>
-				</li>
-			</ul>
-		</div>
+		<?php include "menu.php"; ?>
 	</nav>
 	<div class="container">
 		<div class="row">
 			<div class="col-md-4">
-				<h3>Cadastrar Medico</h3>
-				<form role="form-horizontal">
+				<h3>Login</h3>
+				<form role="form-horizontal" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 					<div class="form-group">
-						<label for="inputNome">
-							Nome completo
-						</label>
-						<input type="text" class="form-control" id="inputNome">
-					</div>
-					<div class="form-group">
-						<label for="inputCPF">
-							CPF
-						</label>
-						<input type="text" class="form-control" id="inputCPF">
-					</div>
-					<div class="form-group">
+					<?php 
+					if(!empty($error_msg)){
+						echo "<div class=\"alert alert-danger\">$error_msg</div>";
+					}
+					?>
 						<label for="inputUsuario">
 							Usuário
 						</label>
-						<input type="name" class="form-control" id="inputUsuario">
+						<input type="name" class="form-control" id="inputUsuario" name="usuario" required>
 					</div>
 					<div class="form-group">
-						<label for="inputPassword1">
+						<label for="inputSenha">
 							Senha
 						</label>
-						<input type="password" class="form-control" id="inputPassword">
+						<input type="password" class="form-control" id="inputSenha" name="senha" required>
 					</div>
+					<div class="checkbox">
+						<label>
+							<input type="checkbox"> Remember me
+						</label>
+					</div> 
 					<button type="submit" class="btn btn-default">
-						Cadastrar
+						Sign in
 					</button>
 				</form>
 			</div>
