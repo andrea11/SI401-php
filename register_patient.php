@@ -95,49 +95,49 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 						<label for="inputNome">
 							Nome completo
 						</label>
-						<input type="text" class="form-control" id="inputNome" maxlength="50" name="nome" required>
+						<input type="text" class="form-control" id="inputNome" maxlength="50" name="nome" <?php if(!empty($_SESSION['chefe']) && $_SESSION['chefe'] == 0){ echo "readonly";} else { echo "required";} ?>>
 					</div>
 					<div class="form-group">
 						<label for="inputData">
 							Data de aniversário
 						</label>
-						<input type="text" class="form-control" id="inputData" name="data_aniversario">
+						<input type="text" class="form-control" id="inputData" name="data_aniversario" <?php if(!empty($_SESSION['chefe']) && $_SESSION['chefe'] == 0){ echo "readonly";} ?>>
 					</div>
 					<div class="form-group">
 						<label for="inputCPF">
 							CPF
 						</label>
-						<input type="number" class="form-control" id="inputCPF" name="cpf" required>
+						<input type="number" class="form-control" id="inputCPF" name="cpf" <?php if(!empty($_SESSION['chefe']) && $_SESSION['chefe'] == 0){ echo "readonly";} else { echo "required";} ?>>
 					</div>
 					<div class="form-group">
 						<label for="inputTelefone">
 							Telefone
 						</label>
-						<input type="text" class="form-control" id="inputTelefone" name="telefone">
+						<input type="text" class="form-control" id="inputTelefone" name="telefone" <?php if(!empty($_SESSION['chefe']) && $_SESSION['chefe'] == 0){ echo "readonly";} ?>>
 					</div>
 					<div class="form-group">
 						<label for="inputEmail">
 							E-mail
 						</label>
-						<input type="email" class="form-control" id="inputEmail" maxlength="40" name="email">
+						<input type="email" class="form-control" id="inputEmail" maxlength="40" name="email" <?php if(!empty($_SESSION['chefe']) && $_SESSION['chefe'] == 0){ echo "readonly";} ?>>
 					</div>
 					<div class="form-group">
 						<label for="inputTS">
 							Tipo sanguíneo
 						</label>
-						<input type="text" class="form-control" id="inputTS" maxlength="3" name="tipo_sanguineo" required>
+						<input type="text" class="form-control" id="inputTS" maxlength="3" name="tipo_sanguineo" <?php if(!empty($_SESSION['chefe']) && $_SESSION['chefe'] == 0){ echo "readonly";} else { echo "required";} ?>>
 					</div>
 					<div class="form-group">
 						<label for="inputPdS">
 							Plano de saúde
 						</label>
-						<input type="text" class="form-control" id="inputPdS" maxlength="30" name="plano_saude" required>
+						<input type="text" class="form-control" id="inputPdS" maxlength="30" name="plano_saude" <?php if(!empty($_SESSION['chefe']) && $_SESSION['chefe'] == 0){ echo "readonly";} else { echo "required";} ?>>
 					</div>
 					<div class="form-group">
 						<label for="inputAlergias">
 							Alergias
 						</label>
-						<input type="text" class="form-control" id="inputAlergias" maxlength="100" name="alergias">
+						<input type="text" class="form-control" id="inputAlergias" maxlength="100" name="alergias" <?php if(!empty($_SESSION['chefe']) && $_SESSION['chefe'] == 0){ echo "readonly";} ?>>
 					</div>
 					<div class="form-group">
 						<label for="inputProntuario">Prontuário</label>

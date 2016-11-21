@@ -10,13 +10,13 @@ if(!empty($_SESSION['usuario'])){
 	
 	echo '<li ' . (strpos($uri, "list_patient.php") !== false ? 'class="active"' : '') . '>
 					<a href="list_patient.php" class="">Consultar Paciente</a>
+		  </li>
+		  <li ' . (strpos($uri, "register_patient.php") !== false ? 'class="active"' : '') . '>
+					<a href="register_patient.php" class="">Cadastrar Paciente</a>
 		  </li>';
 		  
 	if(!empty($_SESSION['chefe']) && $_SESSION['chefe'] == 1){
-		echo 	'<li ' . (strpos($uri, "register_patient.php") !== false ? 'class="active"' : '') . '>
-					<a href="register_patient.php" class="">Cadastrar Paciente</a>
-				</li>
-				<li ' . (strpos($uri, "register_doctor.php") !== false ? 'class="active"' : '') . '>
+		echo 	'<li ' . (strpos($uri, "register_doctor.php") !== false ? 'class="active"' : '') . '>
 					<a href="register_doctor.php" class="">Cadastrar Medico</a>
 				</li>';
 	}
